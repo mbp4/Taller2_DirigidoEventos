@@ -1,9 +1,11 @@
 package com.example.taller2_dirigidoeventos
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -12,7 +14,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -24,6 +28,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.util.Date
 
 class Inicio : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,6 +99,8 @@ fun lectorNombre(context: Context) {
         Spacer(modifier = Modifier.height(16.dp)) //damos un espacio
 
         BotonConfiguracion() //llamamos a la funcion que crea el boton de configuracion
+
+        BotonRed() //llamamos a la funcion que realizara una tarea en segundo plano
     }
 }
 
@@ -116,3 +127,38 @@ fun BotonConfiguracion() {
 
     //creamos un boton que nos llevara a la pantalla de configuracion
 }
+
+@Composable
+fun BotonRed(){
+
+    val isLoading = remember { mutableStateOf(false) }
+    val progreso = remember { mutableStateOf(0f) }
+    val dialog = remember { mutableStateOf(false) }
+
+    Spacer(modifier = Modifier.height(16.dp))
+
+    Button(onClick = {
+        isLoading.value = true
+        CoroutineScope(Dispatchers.Main).launch {
+            for (i in 1..10) {
+                delay(700)
+                progreso.value = i / 10f
+            }
+            isLoading.value = false
+            dialog.value = true
+        }
+    }) {
+        Text("Realizar comprobación de red")
+    }
+
+    if (isLoading.value) {
+        Spacer(modifier = Modifier.height(16.dp))
+        Text("Comprobando red...")
+
+        Spacer(modifier = Modifier.height(16.dp))
+        CircularProgressIndicator(progress = progreso.value)
+
+    }
+
+}
+
