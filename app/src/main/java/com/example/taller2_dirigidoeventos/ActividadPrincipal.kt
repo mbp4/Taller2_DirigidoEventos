@@ -100,6 +100,8 @@ fun lectorNombre(context: Context) {
 
         BotonConfiguracion() //llamamos a la funcion que crea el boton de configuracion
 
+        Spacer(modifier = Modifier.height(16.dp))
+
         BotonRed() //llamamos a la funcion que realizara una tarea en segundo plano
     }
 }
