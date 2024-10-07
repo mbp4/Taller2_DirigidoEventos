@@ -45,7 +45,8 @@ class Inicio : ComponentActivity() {
 
 @Composable
 fun lectorNombre(context: Context) {
-    val nombre = remember { mutableStateOf("") } //creamos una variable que cambie su estado en el caso de que esta se modifique, inicialmente aparece vacia
+    val nombre = remember { mutableStateOf("") }
+    //creamos una variable que guarde el nombre del usuario
 
     val sharedPreferences = remember {
         context.getSharedPreferences("BackgroundPrefs", Context.MODE_PRIVATE)
@@ -75,6 +76,7 @@ fun lectorNombre(context: Context) {
             with(sharedPreferences.edit()) {
                 putString("nombre", nombre.value)
                 apply()
+
                 context.startActivity(
                     Intent(context, Inicio::class.java)
                 )
@@ -94,6 +96,7 @@ fun lectorNombre(context: Context) {
                 text = "Bienvenido $nombreGuardado"
             }
         })
+
         //usamos AndroidView para poder mostrar el nombre que ha guardado el usuario haciendo uso del textView
 
         Spacer(modifier = Modifier.height(16.dp)) //damos un espacio
