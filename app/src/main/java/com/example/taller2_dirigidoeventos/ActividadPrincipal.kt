@@ -147,6 +147,7 @@ fun BotonRed(){
             isLoading.value = false
             dialog.value = true
         }
+        dialog.value = false
     }) {
         Text("Realizar comprobación de red")
     }
@@ -157,7 +158,14 @@ fun BotonRed(){
 
         Spacer(modifier = Modifier.height(16.dp))
         CircularProgressIndicator(progress = progreso.value)
+    }
 
+    if (dialog.value){
+        Toast.makeText(
+            LocalContext.current,
+            "Red estable",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
 }
