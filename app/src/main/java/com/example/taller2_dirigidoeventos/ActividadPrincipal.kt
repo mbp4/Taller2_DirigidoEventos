@@ -103,7 +103,7 @@ fun lectorNombre(context: Context) {
 
         BotonConfiguracion() //llamamos a la funcion que crea el boton de configuracion
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp)) //damos un espacio
 
         BotonRed() //llamamos a la funcion que realizara una tarea en segundo plano
     }
@@ -139,20 +139,26 @@ fun BotonRed(){
     val isLoading = remember { mutableStateOf(false) }
     val progreso = remember { mutableStateOf(0f) }
     val dialog = remember { mutableStateOf(false) }
+    //creamos variables que nos ayudaran a realizar la tarea en segundo plano
 
-    Spacer(modifier = Modifier.height(16.dp))
+    Spacer(modifier = Modifier.height(16.dp)) //damos un espacio
 
     Button(onClick = {
-        isLoading.value = true
-        CoroutineScope(Dispatchers.Main).launch {
-            for (i in 1..10) {
-                delay(700)
-                progreso.value = i / 10f
+        isLoading.value = true //cambiamos el valor de la variable para que se muestre el progressbar circular
+        Thread{
+            //usamos un hebra para que se ejecute en segundo plano
+
+            for (i in 1..10) { //realizamos el proceso 10 veces
+                Thread.sleep(700) //hacemos que la hebra se detenga durante 700 milisegundos
+                progreso.value = i / 10f //cambiamos el valor del progreso para que se muestre el progressbar circular
             }
             isLoading.value = false
             dialog.value = true
-        }
+            //cambiamos el valor de la variable para que se muestre el dialogo
+        }.start()
+
         dialog.value = false
+        //cambiamos el valor de la variable para que el dialogo vuelva a su estado original y no se este mostrando continuamente
     }) {
         Text("Realizar comprobación de red")
     }
@@ -163,6 +169,7 @@ fun BotonRed(){
 
         Spacer(modifier = Modifier.height(16.dp))
         CircularProgressIndicator(progress = progreso.value)
+        //mostramos el progressbar circular mientras se realiza la tarea en segundo plano en el caso de que se haya pulsado el boton de realizar comprobacion de red
     }
 
     if (dialog.value){
