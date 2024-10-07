@@ -182,14 +182,14 @@ FUNCION BotonRed(){
     CREAR botón
         AL hacer clic
             isLoading como verdadero
-            
+            CREAMOS hebra
                 REPETIR 10 veces
-                    ESPERAR 700 milisegundos
+                    DORMIR 700 milisegundos
                     AUMENTAR progreso en un 10%
                 
                 isLoading como falso
                 dialog como verdadero
-
+           INICIAMOS la hebra
         MOSTRAR texto "Realizar comprobación de red"
     
     SI isLoading es verdadero
@@ -314,4 +314,4 @@ Al usar Composable los errores que han aparecido a la hora de programar han sido
 
  -> Otro aspecto a tener en cuenta a la hora de introducir un nombre, si el usuario decide pulsar el boton sin introducir nada por pantalla, la variable no se verá alterada y el mensaje de     bienvenida será uno sin personalizar
 
-Por otra parte el botón que comprueba la red tendrá un nuevo estado que en el caso de que sea verdadero se enviará un dialog que le muestre al usuario que la comprobación de red ha sido o no existosa.
+Por otra parte el botón que comprueba la red tendrá un nuevo estado que en el caso de que sea verdadero se enviará un dialog que le muestre al usuario que la comprobación de red ha sido o no existosa. Al solicitar que la comprobación sea en segundo plano se pueden usar hebras o servicios, en este caso hacemos uso de las hebras ya que es algo más familiar para mi a la hora de programar.
