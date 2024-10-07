@@ -306,7 +306,7 @@ Por último, encontramos una función que guarda el estado del color de fondo y 
 
 Para la realizacion del proyecto se ha optado por usar Jetpack Compose ya que fue lo más visto durante las clases por lo que me resulto más sencillo que usar la opcion de layout, ya que aunque parece más simple necesitaba entender su funciónamiento para poder realizar la entrega de la mejor manera. 
 
-Al usar Composable los errores que han aparecido a la hora de programar han sido en la parte del background y a la hora de gaurdar el nombre: 
+Al usar Composable los errores que han aparecido a la hora de programar han sido en la parte del background y a la hora de guardar el nombre: 
 
  -> Al cambiar el fondo de la aplicación se lograba hacer en la pantalla de configuración únicamente, es decir, el color de fondo no se guardaba al navegar entre activities, para esto se       ha hecho uso de variables las cuales se encargaban de tener un estado el cual iba a cambiar dependiendo de la elección del usuario.
 
@@ -314,3 +314,4 @@ Al usar Composable los errores que han aparecido a la hora de programar han sido
 
  -> Otro aspecto a tener en cuenta a la hora de introducir un nombre, si el usuario decide pulsar el boton sin introducir nada por pantalla, la variable no se verá alterada y el mensaje de     bienvenida será uno sin personalizar
 
+Por otra parte el botón que comprueba la red tendrá un nuevo estado que en el caso de que sea verdadero se enviará un dialog que le muestre al usuario que la comprobación de red ha sido o no existosa.
